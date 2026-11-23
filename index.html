@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-AO" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balbina Sofia Alfredo | Técnica de Enfermagem Geral</title>
+    
+    <!-- Google Fonts: Playfair Display (Serifada Elegante) e Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones modernos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração do Tailwind para Dark Mode e Paleta Editorial Feminina + Verde-Sálvia Clínico -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fdf2f4',
+                            100: '#fce7eb',
+                            200: '#f9d0d9',
+                            300: '#f4a9ba',
+                            400: '#ec7894',
+                            500: '#df4c73',
+                            600: '#c8325c',
+                            700: '#a8244b',
+                            800: '#8d2042',
+                            900: '#791e3c',
+                        },
+                        sage: {
+                            50: '#f4f7f5',
+                            100: '#e3ebe6',
+                            200: '#c7d7ce',
+                            400: '#7fa18e',
+                            500: '#5e8470',
+                            600: '#496858',
+                            700: '#3c5447',
+                        },
+                        plum: {
+                            800: '#2d1a26',
+                            900: '#1f111a',
+                            950: '#140a11',
+                        },
+                        champagne: {
+                            100: '#fbf7f2',
+                            200: '#f5ebe0',
+                            400: '#d4a373',
+                            500: '#bc8a5f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animações suaves de aparição no scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilo sutil para barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2b4bd;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #5c3349;
+        }
+    </style>
+</head>
+<body class="bg-champagne-100 text-stone-800 dark:bg-plum-950 dark:text-stone-100 font-sans antialiased transition-colors duration-300 selection:bg-primary-500 selection:text-white">
+
+    <!-- ==========================================
+         1. BARRA DE NAVEGAÇÃO FIXA NO TOPO
+    =========================================== -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-champagne-100/90 dark:bg-plum-900/90 backdrop-blur-md border-b border-primary-200/60 dark:border-plum-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logotipo -->
+                <a href="#inicio" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-primary-600 to-sage-500 flex items-center justify-center text-white font-display font-bold text-base shadow-md group-hover:scale-105 transition-transform">
+                        BS
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight text-stone-900 dark:text-white">
+                        Balbina <span class="text-primary-600 dark:text-primary-400 italic">Sofia</span>
+                    </span>
+                </a>
+
+                <!-- Links de Navegação (Desktop) -->
+                <nav class="hidden lg:flex items-center space-x-7">
+                    <a href="#inicio" class="text-sm font-medium text-stone-600 hover:text-primary-600 dark:text-stone-300 dark:hover:text-primary-300 transition-colors">Início</a>
+                    <a href="#sobre" class="text-sm font-medium text-stone-600 hover:text-primary-600 dark:text-stone-300 dark:hover:text-primary-300 transition-colors">Sobre & Objetivo</a>
+                    <a href="#trajetoria" class="text-sm font-medium text-stone-600 hover:text-primary-600 dark:text-stone-300 dark:hover:text-primary-300 transition-colors">Experiência & Formação</a>
+                    <a href="#competencias" class="text-sm font-medium text-stone-600 hover:text-primary-600 dark:text-stone-300 dark:hover:text-primary-300 transition-colors">Competências</a>
+                    <a href="#contato" class="text-sm font-medium text-stone-600 hover:text-primary-600 dark:text-stone-300 dark:hover:text-primary-300 transition-colors">Contato</a>
+                </nav>
+
+                <!-- Controles Direita: Dark/Light Mode + Menu Mobile -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Botão Tema Claro/Escuro -->
+                    <button id="theme-toggle" type="button" aria-label="Alternar tema" class="p-2.5 rounded-full bg-white hover:bg-primary-50 dark:bg-plum-800 dark:hover:bg-plum-800/80 text-primary-700 dark:text-champagne-400 border border-primary-100 dark:border-plum-800 transition-all focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <i id="theme-icon" class="fas fa-moon text-base"></i>
+                    </button>
+
+                    <!-- Botão Menu Mobile -->
+                    <button id="mobile-menu-btn" type="button" aria-label="Abrir menu" class="lg:hidden p-2.5 rounded-full bg-white hover:bg-primary-50 dark:bg-plum-800 text-stone-700 dark:text-stone-200 border border-primary-100 dark:border-plum-800 transition-colors">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Dropdown Mobile -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-champagne-100 dark:bg-plum-900 border-b border-primary-200/60 dark:border-plum-800 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+            <a href="#inicio" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-stone-700 dark:text-stone-200 hover:bg-primary-50 dark:hover:bg-plum-800">Início</a>
+            <a href="#sobre" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-stone-700 dark:text-stone-200 hover:bg-primary-50 dark:hover:bg-plum-800">Sobre & Objetivo</a>
+            <a href="#trajetoria" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-stone-700 dark:text-stone-200 hover:bg-primary-50 dark:hover:bg-plum-800">Experiência & Formação</a>
+            <a href="#competencias" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-stone-700 dark:text-stone-200 hover:bg-primary-50 dark:hover:bg-plum-800">Competências</a>
+            <a href="#contato" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-primary-600 dark:text-primary-300 font-semibold hover:bg-primary-50 dark:hover:bg-plum-800">Contato</a>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         2. SEÇÃO HERO (APRESENTAÇÃO PRINCIPAL)
+    =========================================== -->
+    <section id="inicio" class="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+            
+            <!-- Conteúdo Textual -->
+            <div class="w-full lg:w-3/5 text-center lg:text-left reveal active">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-50 dark:bg-sage-700/30 border border-sage-200 dark:border-sage-600/40 text-sage-700 dark:text-sage-200 text-xs sm:text-sm font-medium mb-5 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-sage-500 animate-pulse"></span>
+                    Disponível para Oportunidades • Benguela, Angola
+                </div>
+
+                <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-stone-900 dark:text-white mb-3">
+                    Balbina Sofia Alfredo
+                </h1>
+
+                <p class="text-sm sm:text-base font-semibold uppercase tracking-wider text-sage-600 dark:text-sage-400 mb-4">
+                    Técnica de Enfermagem Geral | Cuidados Clínicos & Atendimento Humanizado
+                </p>
+
+                <h2 class="font-display italic font-medium text-lg sm:text-xl text-primary-700 dark:text-primary-300 mb-6 leading-relaxed">
+                    Técnica de Enfermagem Geral dedicada ao cuidado humanizado, rigor clínico e acolhimento de excelência.
+                </h2>
+
+                <p class="text-stone-600 dark:text-stone-300 text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
+                    Com formação concluída em Enfermagem Geral pelo Colégio Bueia & Filhos e experiência prática hospitalar no Hospital Municipal de Benguela, atuo com responsabilidade, empatia e comprometimento ético para promover o bem-estar dos pacientes e apoiar equipes de saúde.
+                </p>
+
+                <!-- Botões de Ação -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 mb-9">
+                    <a href="#contato" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-medium text-base shadow-lg shadow-primary-600/25 hover:shadow-primary-600/40 transition-all flex items-center justify-center gap-2.5">
+                        <i class="fas fa-phone-volume text-sm"></i>
+                        <span>Entrar em Contato</span>
+                    </a>
+                    <a href="#trajetoria" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white dark:bg-plum-800 hover:bg-sage-50 dark:hover:bg-plum-800/70 text-stone-800 dark:text-white border border-sage-200 dark:border-plum-800 font-medium text-base transition-all flex items-center justify-center gap-2.5 shadow-sm">
+                        <i class="fas fa-user-nurse text-sage-600 dark:text-sage-400"></i>
+                        <span>Ver Trajetória</span>
+                    </a>
+                </div>
+
+                <!-- Resumo Rápido de Credenciais Reais -->
+                <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 pt-4 border-t border-primary-200/60 dark:border-plum-800">
+                    <div>
+                        <p class="font-display font-bold text-lg sm:text-xl text-primary-600 dark:text-primary-300">Enfermagem</p>
+                        <p class="text-xs text-stone-500 dark:text-stone-400">Ensino Médio Concluído</p>
+                    </div>
+                    <div>
+                        <p class="font-display font-bold text-lg sm:text-xl text-sage-600 dark:text-sage-400">6 Meses</p>
+                        <p class="text-xs text-stone-500 dark:text-stone-400">Estágio Hospitalar</p>
+                    </div>
+                    <div>
+                        <p class="font-display font-bold text-lg sm:text-xl text-primary-600 dark:text-primary-300">Benguela</p>
+                        <p class="text-xs text-stone-500 dark:text-stone-400">Bairro da Calomanga</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fotografia Permanente de Balbina Sofia Alfredo -->
+            <div class="w-full lg:w-2/5 flex flex-col items-center reveal active">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80">
+                    <!-- Halo suave -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary-400/25 via-sage-400/25 to-champagne-400/30 rounded-full blur-2xl"></div>
+                    
+                    <!-- Moldura Orgânica -->
+                    <div class="relative w-full h-full rounded-[2.5rem] rotate-2 hover:rotate-0 transition-transform duration-500 bg-gradient-to-br from-white to-sage-100 dark:from-plum-800 dark:to-plum-900 p-3 shadow-2xl border border-primary-200/70 dark:border-plum-800">
+                        <div class="w-full h-full rounded-[2rem] bg-gradient-to-b from-sage-100 to-primary-100 dark:from-plum-800 dark:to-plum-900 overflow-hidden relative">
+                            <img
+                                src="foto.jpg"
+                                alt="Balbina Sofia Alfredo — Técnica de Enfermagem Geral"
+                                style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x600/e3ebe6/3c5447?text=Balbina+Sofia+Alfredo';"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Badge Flutuante -->
+                    <div class="absolute -bottom-4 -left-4 bg-white dark:bg-plum-800 px-4 py-2.5 rounded-2xl shadow-xl border border-sage-200 dark:border-plum-800 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-sage-100 dark:bg-sage-600/30 text-sage-600 dark:text-sage-300 flex items-center justify-center">
+                            <i class="fas fa-user-nurse text-lg"></i>
+                        </div>
+                        <div class="text-xs">
+                            <p class="font-bold text-stone-900 dark:text-white">Enfermagem Geral</p>
+                            <p class="text-stone-500 dark:text-stone-400">Cuidado Humanizado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         3. SEÇÃO SOBRE & OBJETIVO PROFISSIONAL
+    =========================================== -->
+    <section id="sobre" class="py-16 md:py-20 bg-white dark:bg-plum-900/60 border-y border-primary-200/50 dark:border-plum-800 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto reveal">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-primary-600 dark:text-primary-300 font-semibold text-xs uppercase tracking-widest">Propósito & Identidade</span>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 dark:text-white mt-2">Sobre & Objetivo Profissional</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Objetivo Profissional & Valores -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Destaque do Objetivo Profissional -->
+                    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-primary-50/90 via-champagne-100/80 to-sage-50/90 dark:from-plum-800/80 dark:to-plum-900 border border-primary-200/70 dark:border-plum-800 relative">
+                        <div class="flex items-center gap-2.5 text-primary-700 dark:text-primary-300 font-semibold text-xs uppercase tracking-wider mb-3">
+                            <i class="fas fa-bullseye"></i>
+                            <span>Objetivo Profissional</span>
+                        </div>
+                        <blockquote class="font-display italic text-lg sm:text-xl text-stone-800 dark:text-stone-100 leading-relaxed">
+                            “Busco uma oportunidade onde possa aplicar minhas habilidades em Enfermagem Geral e integrar uma equipe dedicada, garantindo um serviço de excelência, otimizando a eficiência dos processos assistenciais e contribuindo para a criação de um ambiente acolhedor, ético e humanizado.”
+                        </blockquote>
+                    </div>
+
+                    <!-- Resumo de Postura Profissional -->
+                    <p class="text-stone-600 dark:text-stone-300 leading-relaxed text-base">
+                        Pautada pela ética, humildade e honestidade, prezo pela assiduidade e pontualidade rigorosas em todas as rotinas assistenciais. Tenho facilidade de adaptação a diferentes setores clínicos e excelente comunicação com pacientes, familiares e equipes multidisciplinares.
+                    </p>
+                </div>
+
+                <!-- Cartão de Dados Pessoais (Extraídos do CV) -->
+                <div class="lg:col-span-5 bg-champagne-100/70 dark:bg-plum-800/70 rounded-3xl p-6 sm:p-7 border border-primary-200/60 dark:border-plum-800">
+                    <h3 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-5 flex items-center gap-2.5">
+                        <i class="fas fa-id-card text-primary-600 dark:text-primary-300"></i>
+                        <span>Dados Pessoais</span>
+                    </h3>
+
+                    <dl class="space-y-3.5 text-sm">
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Nome Completo</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">Balbina Sofia Alfredo</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Data de Nascimento</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">07/01/2000</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Nacionalidade</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">Angolana</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Naturalidade</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">Benguela (Província de Benguela)</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Estado Civil</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">Solteira</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Residência</dt>
+                            <dd class="text-stone-900 dark:text-white font-semibold">Bairro da Calomanga, Benguela</dd>
+                        </div>
+                        <div class="flex flex-col border-b border-primary-200/50 dark:border-plum-800 pb-2.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium mb-0.5">Filiação</dt>
+                            <dd class="text-stone-800 dark:text-stone-200 font-medium">Benjamim Sanji Alfredo e Joana Domingas Miranda</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between pt-0.5">
+                            <dt class="text-stone-500 dark:text-stone-400 font-medium">Telefones</dt>
+                            <dd class="text-primary-700 dark:text-primary-300 font-bold">+244 923 286 034 / 950 954 418</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         4. SEÇÃO TRAJETÓRIA (EXPERIÊNCIA & FORMAÇÃO)
+    =========================================== -->
+    <section id="trajetoria" class="py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-sage-600 dark:text-sage-400 font-semibold text-xs uppercase tracking-widest">Percurso Clínico & Académico</span>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 dark:text-white mt-2">Experiência & Formação</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 print-compact-grid">
+                
+                <!-- Coluna 1: Experiência Profissional -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-2xl bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-300 flex items-center justify-center">
+                            <i class="fas fa-hospital-user text-lg"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-stone-900 dark:text-white">Experiência Profissional</h3>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-primary-300 dark:border-primary-700 space-y-6">
+                        <article class="relative bg-white dark:bg-plum-900 p-6 rounded-3xl border border-primary-200/70 dark:border-plum-800 shadow-sm">
+                            <!-- Ponto da Timeline -->
+                            <span class="absolute -left-[33px] top-7 w-4 h-4 rounded-full bg-primary-600 ring-4 ring-champagne-100 dark:ring-plum-950"></span>
+                            
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-50 dark:bg-primary-500/15 text-primary-700 dark:text-primary-300 mb-3">
+                                <i class="far fa-clock"></i>
+                                <span>Duração: 6 Meses</span>
+                            </div>
+
+                            <h4 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-1">
+                                Estagiária de Enfermagem Geral
+                            </h4>
+                            <p class="text-sm font-semibold text-sage-600 dark:text-sage-400 mb-4 flex items-center gap-1.5">
+                                <i class="fas fa-location-dot"></i>
+                                <span>Hospital Municipal de Benguela</span>
+                            </p>
+
+                            <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mb-4">
+                                Atuação prática em ambiente hospitalar com foco no cuidado direto e humanizado aos pacientes, integrando a equipe de enfermagem nas rotinas diárias da unidade.
+                            </p>
+
+                            <ul class="space-y-2 text-xs sm:text-sm text-stone-600 dark:text-stone-300">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-sage-600 dark:text-sage-400 mt-1"></i>
+                                    <span>Acolhimento humanizado e triagem inicial de pacientes;</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-sage-600 dark:text-sage-400 mt-1"></i>
+                                    <span>Apoio aos procedimentos de enfermagem e acompanhamento clínico;</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-sage-600 dark:text-sage-400 mt-1"></i>
+                                    <span>Cumprimento rigoroso das normas de biossegurança e rotinas hospitalares.</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Habilitações Literárias & Cursos Profissionais -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-2xl bg-sage-100 dark:bg-sage-600/30 text-sage-600 dark:text-sage-300 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-lg"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-stone-900 dark:text-white">Formação & Cursos</h3>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-sage-300 dark:border-sage-700 space-y-6">
+                        <!-- Habilitações Literárias -->
+                        <article class="relative bg-white dark:bg-plum-900 p-6 rounded-3xl border border-sage-200/80 dark:border-plum-800 shadow-sm">
+                            <span class="absolute -left-[33px] top-7 w-4 h-4 rounded-full bg-sage-600 ring-4 ring-champagne-100 dark:ring-plum-950"></span>
+                            
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-sage-50 dark:bg-sage-700/30 text-sage-700 dark:text-sage-300 mb-3">
+                                Habilitações Literárias • Concluído
+                            </span>
+
+                            <h4 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-1">
+                                Ensino Médio — Curso de Enfermagem Geral
+                            </h4>
+                            <p class="text-sm font-semibold text-primary-600 dark:text-primary-300 mb-3">
+                                Colégio Bueia & Filhos • Benguela
+                            </p>
+                            <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                                Formação técnica e teórica abrangente em fundamentos de enfermagem, assistência clínica, saúde pública, ética profissional e cuidados integrais ao paciente.
+                            </p>
+                        </article>
+
+                        <!-- Curso Profissional -->
+                        <article class="relative bg-white dark:bg-plum-900 p-6 rounded-3xl border border-primary-200/70 dark:border-plum-800 shadow-sm">
+                            <span class="absolute -left-[33px] top-7 w-4 h-4 rounded-full bg-champagne-500 ring-4 ring-champagne-100 dark:ring-plum-950"></span>
+                            
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-champagne-100 dark:bg-champagne-400/20 text-champagne-500 dark:text-champagne-400 mb-3">
+                                Curso Profissional
+                            </span>
+
+                            <h4 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-1">
+                                Curso Básico de Informática
+                            </h4>
+                            <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mt-2">
+                                Domínio de ferramentas digitais essenciais para registro clínico informatizado, organização administrativa, elaboração de relatórios e atendimento ágil.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         5. SEÇÃO COMPETÊNCIAS, PERFIL & IDIOMAS
+    =========================================== -->
+    <section id="competencias" class="py-16 md:py-20 bg-white dark:bg-plum-900/60 border-y border-primary-200/50 dark:border-plum-800 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto reveal">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-primary-600 dark:text-primary-300 font-semibold text-xs uppercase tracking-widest">Qualidades Humanas & Técnicas</span>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 dark:text-white mt-2">Competências, Perfil & Idiomas</h2>
+            </div>
+
+            <!-- 4 Pilares do Perfil Profissional (Extraídos do CV) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 print-compact-grid">
+                
+                <!-- Pilar 1 -->
+                <div class="p-6 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-primary-200/60 dark:border-plum-800 hover:border-primary-400 transition-colors">
+                    <div class="w-12 h-12 rounded-2xl bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-300 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-stone-900 dark:text-white mb-2">Integridade & Ética</h3>
+                    <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                        Boa integridade física e mental, postura humilde, honesta e sigilo ético no cuidado com cada paciente.
+                    </p>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="p-6 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-sage-200/80 dark:border-plum-800 hover:border-sage-400 transition-colors">
+                    <div class="w-12 h-12 rounded-2xl bg-sage-100 dark:bg-sage-600/30 text-sage-600 dark:text-sage-300 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-stone-900 dark:text-white mb-2">Assiduidade & Pontualidade</h3>
+                    <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                        Compromisso rigoroso com horários, escalas de turno e total responsabilidade nas tarefas laborais.
+                    </p>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="p-6 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-primary-200/60 dark:border-plum-800 hover:border-primary-400 transition-colors">
+                    <div class="w-12 h-12 rounded-2xl bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-300 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-stone-900 dark:text-white mb-2">Relacionamento com o Público</h3>
+                    <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                        Excelente capacidade de escuta, acolhimento humanizado e comunicação empática com pacientes e famílias.
+                    </p>
+                </div>
+
+                <!-- Pilar 4 -->
+                <div class="p-6 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-sage-200/80 dark:border-plum-800 hover:border-sage-400 transition-colors">
+                    <div class="w-12 h-12 rounded-2xl bg-sage-100 dark:bg-sage-600/30 text-sage-600 dark:text-sage-300 flex items-center justify-center text-xl mb-4">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-stone-900 dark:text-white mb-2">Adaptação Hospitalar</h3>
+                    <p class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                        Facilidade em se adaptar ao posto de trabalho, protocolos clínicos e trabalho colaborativo em equipe.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Painel Inferior: Línguas Faladas & Ferramentas Digitais -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print-compact-grid">
+                <!-- Línguas Faladas -->
+                <div class="p-6 sm:p-7 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-primary-200/60 dark:border-plum-800">
+                    <h3 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-5 flex items-center gap-2.5">
+                        <i class="fas fa-language text-primary-600 dark:text-primary-300"></i>
+                        <span>Línguas Faladas</span>
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-1.5">
+                                <span class="text-stone-900 dark:text-white">Português</span>
+                                <span class="text-primary-600 dark:text-primary-300">Falado e Escrito (Fluente / Nativo)</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-primary-100 dark:bg-plum-900 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary-600 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-1.5">
+                                <span class="text-stone-900 dark:text-white">Inglês</span>
+                                <span class="text-sage-600 dark:text-sage-400">Noções Básicas</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-sage-100 dark:bg-plum-900 rounded-full overflow-hidden">
+                                <div class="h-full bg-sage-600 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Habilidades Técnicas & Digitais -->
+                <div class="p-6 sm:p-7 rounded-3xl bg-champagne-100/70 dark:bg-plum-800/70 border border-sage-200/80 dark:border-plum-800">
+                    <h3 class="font-display font-bold text-xl text-stone-900 dark:text-white mb-5 flex items-center gap-2.5">
+                        <i class="fas fa-laptop-medical text-sage-600 dark:text-sage-400"></i>
+                        <span>Competências Clínicas & Digitais</span>
+                    </h3>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-sage-200 dark:border-plum-800">Enfermagem Geral</span>
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-sage-200 dark:border-plum-800">Atendimento Humanizado</span>
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-sage-200 dark:border-plum-800">Triagem & Acolhimento</span>
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-primary-200 dark:border-plum-800">Informática Básica</span>
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-primary-200 dark:border-plum-800">Organização de Registros</span>
+                        <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-plum-900 text-stone-700 dark:text-stone-200 border border-primary-200 dark:border-plum-800">Trabalho em Equipe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         6. SEÇÃO CONTATO DIRETO
+    =========================================== -->
+    <section id="contato" class="py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-primary-600 dark:text-primary-300 font-semibold text-xs uppercase tracking-widest">Recrutamento & Oportunidades</span>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 dark:text-white mt-2">Entre em Contato</h2>
+                <p class="text-stone-600 dark:text-stone-400 mt-3 text-sm sm:text-base">
+                    Estou disponível para entrevistas e integração imediata em hospitais, clínicas, centros médicos e instituições de saúde em Benguela.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Coluna Esquerda: Cartões Interativos dos Telefones & Localização -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-4">
+                    
+                    <!-- Telefone Principal: +244 923 286 034 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-white dark:bg-plum-900 border border-primary-200/70 dark:border-plum-800 shadow-sm">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-300">Contato Principal</span>
+                            <button type="button" data-copy="+244 923 286 034" class="copy-phone-btn px-3 py-1 rounded-full text-xs font-medium bg-champagne-100 hover:bg-primary-100 dark:bg-plum-800 text-stone-700 dark:text-stone-200 transition-colors">
+                                <i class="far fa-copy mr-1"></i><span>Copiar</span>
+                            </button>
+                        </div>
+                        <p class="font-display font-bold text-2xl text-stone-900 dark:text-white mb-4">+244 923 286 034</p>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <a href="tel:+244923286034" class="py-2.5 px-4 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fas fa-phone"></i>
+                                <span>Ligar Agora</span>
+                            </a>
+                            <a href="https://wa.me/244923286034?text=Ol%C3%A1%20Balbina%20Sofia%2C%20vi%20o%20seu%20curr%C3%ADculo%20de%20Enfermagem%20Geral%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer" class="py-2.5 px-4 rounded-full bg-sage-600 hover:bg-sage-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fab fa-whatsapp text-base"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Telefone Alternativo: +244 950 954 418 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-white dark:bg-plum-900 border border-primary-200/70 dark:border-plum-800 shadow-sm">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-sage-600 dark:text-sage-400">Contato Alternativo</span>
+                            <button type="button" data-copy="+244 950 954 418" class="copy-phone-btn px-3 py-1 rounded-full text-xs font-medium bg-champagne-100 hover:bg-primary-100 dark:bg-plum-800 text-stone-700 dark:text-stone-200 transition-colors">
+                                <i class="far fa-copy mr-1"></i><span>Copiar</span>
+                            </button>
+                        </div>
+                        <p class="font-display font-bold text-2xl text-stone-900 dark:text-white mb-4">+244 950 954 418</p>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <a href="tel:+244950954418" class="py-2.5 px-4 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fas fa-phone"></i>
+                                <span>Ligar Agora</span>
+                            </a>
+                            <a href="https://wa.me/244950954418?text=Ol%C3%A1%20Balbina%20Sofia%2C%20vi%20o%20seu%20curr%C3%ADculo%20de%20Enfermagem%20Geral%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer" class="py-2.5 px-4 rounded-full bg-sage-600 hover:bg-sage-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-colors">
+                                <i class="fab fa-whatsapp text-base"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Localização -->
+                    <div class="p-5 rounded-3xl bg-champagne-100/80 dark:bg-plum-800/70 border border-primary-200/60 dark:border-plum-800 flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-300 flex items-center justify-center shrink-0">
+                            <i class="fas fa-map-marker-alt text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">Residência</p>
+                            <p class="font-semibold text-stone-900 dark:text-white">Bairro da Calomanga, Benguela — Angola</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita: Formulário Rápido que Encaminha Direto para o WhatsApp Dela -->
+                <div id="contato-form-card" class="lg:col-span-6 bg-white dark:bg-plum-900 rounded-[2rem] p-6 sm:p-8 shadow-xl border border-primary-200/60 dark:border-plum-800 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-stone-900 dark:text-white mb-2">Enviar Mensagem Rápida</h3>
+                        <p class="text-sm text-stone-600 dark:text-stone-400 mb-6">
+                            Preencha os dados abaixo para iniciar uma conversa direta no WhatsApp com a Balbina Sofia.
+                        </p>
+
+                        <form id="whatsapp-recruiter-form" novalidate class="space-y-4">
+                            <div>
+                                <label for="recruiter-name" class="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1.5">Seu Nome ou Instituição *</label>
+                                <input type="text" id="recruiter-name" required placeholder="Ex: Clínica Saúde Benguela / Dr. António" class="w-full px-4 py-3 rounded-2xl bg-champagne-100/60 dark:bg-plum-800 border border-primary-200/70 dark:border-plum-800 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                                <p id="error-recruiter-name" class="hidden text-xs text-rose-500 mt-1">Por favor, informe seu nome ou instituição.</p>
+                            </div>
+
+                            <div>
+                                <label for="target-phone" class="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1.5">Enviar para o número</label>
+                                <select id="target-phone" class="w-full px-4 py-3 rounded-2xl bg-champagne-100/60 dark:bg-plum-800 border border-primary-200/70 dark:border-plum-800 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                                    <option value="244923286034">+244 923 286 034 (Principal)</option>
+                                    <option value="244950954418">+244 950 954 418 (Alternativo)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="recruiter-message" class="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1.5">Mensagem / Convite para Entrevista *</label>
+                                <textarea id="recruiter-message" rows="4" required placeholder="Olá Balbina Sofia, gostaríamos de agendar uma entrevista para a vaga de Técnica de Enfermagem..." class="w-full px-4 py-3 rounded-2xl bg-champagne-100/60 dark:bg-plum-800 border border-primary-200/70 dark:border-plum-800 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all resize-none"></textarea>
+                                <p id="error-recruiter-msg" class="hidden text-xs text-rose-500 mt-1">Por favor, escreva uma breve mensagem.</p>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 px-6 rounded-full bg-sage-600 hover:bg-sage-700 text-white font-semibold shadow-lg shadow-sage-600/25 transition-all flex items-center justify-center gap-2.5">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Enviar via WhatsApp</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+    <footer class="py-8 border-t border-primary-200/60 dark:border-plum-800 text-center text-sm text-stone-500 dark:text-stone-400 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© <span id="current-year"></span> Balbina Sofia Alfredo • Técnica de Enfermagem Geral • Benguela, Angola.</p>
+            <div class="flex items-center gap-4">
+                <a href="#inicio" class="hover:text-primary-600 dark:hover:text-primary-300 transition-colors">Voltar ao topo <i class="fas fa-arrow-up ml-1"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT ESTRUTURADO
+    =========================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Ano atual no rodapé
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // 2. Alternância de Tema (Claro / Escuro)
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlEl = document.documentElement;
+
+            const savedTheme = localStorage.getItem('balbina-portfolio-theme');
+            if (savedTheme === 'dark') {
+                htmlEl.classList.add('dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                const isDark = htmlEl.classList.contains('dark');
+                localStorage.setItem('balbina-portfolio-theme', isDark ? 'dark' : 'light');
+                if (isDark) {
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            });
+
+            // 3. Menu Mobile
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 4. Copiar Números de Telefone com 1 Clique
+            document.querySelectorAll('.copy-phone-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const phoneToCopy = btn.getAttribute('data-copy');
+                    const tempInput = document.createElement('textarea');
+                    tempInput.value = phoneToCopy;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+
+                    const spanEl = btn.querySelector('span');
+                    const originalText = spanEl.textContent;
+                    spanEl.textContent = 'Copiado!';
+                    btn.classList.add('bg-sage-600', 'text-white');
+                    setTimeout(() => {
+                        spanEl.textContent = originalText;
+                        btn.classList.remove('bg-sage-600', 'text-white');
+                    }, 2000);
+                });
+            });
+
+            // 6. Formulário Rápido para Recrutadores (Encaminha para WhatsApp)
+            const whatsappForm = document.getElementById('whatsapp-recruiter-form');
+            const recruiterName = document.getElementById('recruiter-name');
+            const recruiterMsg = document.getElementById('recruiter-message');
+            const targetPhone = document.getElementById('target-phone');
+
+            whatsappForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+
+                if (recruiterName.value.trim().length < 2) {
+                    document.getElementById('error-recruiter-name').classList.remove('hidden');
+                    valid = false;
+                } else {
+                    document.getElementById('error-recruiter-name').classList.add('hidden');
+                }
+
+                if (recruiterMsg.value.trim().length < 5) {
+                    document.getElementById('error-recruiter-msg').classList.remove('hidden');
+                    valid = false;
+                } else {
+                    document.getElementById('error-recruiter-msg').classList.add('hidden');
+                }
+
+                if (!valid) return;
+
+                const selectedNumber = targetPhone.value;
+                const fullText = `Olá Balbina Sofia, sou *${recruiterName.value.trim()}*.\n\n${recruiterMsg.value.trim()}`;
+                const whatsappUrl = `https://wa.me/${selectedNumber}?text=${encodeURIComponent(fullText)}`;
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            });
+
+            // 7. Animações Sutis ao Rolar a Página
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
